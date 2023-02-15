@@ -1,9 +1,9 @@
 import { searchCep } from './helpers/cepFunctions';
-import { handleProductsLoading } from './Js/handleProducts';
+import { handleProducts } from './Js/handleProducts';
 import './style.css';
 
 const cepBtn = document.querySelector('.cep-button');
 
-handleProductsLoading();
+handleProducts();
 
 cepBtn.addEventListener('click', searchCep);

@@ -303,6 +303,14 @@
   display: none;
 }
 
+.loading, .error {
+  font-size: 2rem;
+  position: relative;
+  top: 20vh;
+  text-align: center;
+  width: 70%;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
