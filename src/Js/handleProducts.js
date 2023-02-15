@@ -1,5 +1,8 @@
 import { fetchProduct, fetchProductsList } from '../helpers/fetchFunctions';
-import { createProductElement, createCustomElement, createCartProductElement } from '../helpers/shopFunctions';
+import { createProductElement,
+  createCustomElement,
+  createCartProductElement } from '../helpers/shopFunctions';
+import { saveCartID } from '../helpers/cartFunctions';
 import removeLoadingLine from './removeLine';
 
 const productsContainer = document.querySelector('.products');
@@ -20,6 +23,7 @@ const selectProduct = (list) => {
       const selected = fetchProduct(itemId);
       selected
         .then((item) => {
+          saveCartID(item.id);
           const itemObj = {
             id: item.id,
             title: item.title,
