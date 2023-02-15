@@ -10,5 +10,3 @@ export const fetchProductsList = async (query) => {
   const resultList = data.results;
   return resultList;
 };
-// const resultado = await fetchProductsList('computador');
-// console.log(resultado);

@@ -93,6 +93,7 @@
 .product__title {
   display: -webkit-box;
   color: rgb(57, 63, 71);
+  padding: .4rem;
   font-size: 12px;
   margin-top: 8px;
   overflow: hidden;

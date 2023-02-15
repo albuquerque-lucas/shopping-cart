@@ -6,28 +6,25 @@ import './style.css';
 const cepBtn = document.querySelector('.cep-button');
 const productsContainer = document.querySelector('.products');
 
-cepBtn.addEventListener('click', searchCep);
+const addPreLoader = () => {
+  const preLoader = document.createElement('div');
+  preLoader.classList.add('loading');
+  preLoader.innerText = 'carregando...';
+  productsContainer.appendChild(preLoader);
+};
 
-const products = await fetchProductsList('computador');
-const productIds = products.map((item) => item.id);
-const productTitles = products.map((item) => item.title);
-const productThumbnails = products.map((item) => item.thumbnail);
-const productPrices = products.map((item) => item.price);
+const removePreLoader = () => {
+  const preLoader = document.querySelector('.loading');
+  preLoader.remove();
+};
 
-products.forEach((product) => {
-  const currentProduct = {
-    id: product.id,
-    title: product.title,
-    thumbnail: product.thumbnail,
-    price: product.price,
-  };
-
-  const element = createProductElement(currentProduct);
-  productsContainer.appendChild(element);
+addPreLoader();
+fetchProductsList('computador').then((data) => {
+  data.forEach((element) => {
+    const div = createProductElement(element);
+    productsContainer.appendChild(div);
+  });
+  removePreLoader();
 });
-// for (let i = 0; i < testeProduct.length; i += 1) {
-//   createProductElement();
-// }
 
-// console.log(products);
-// console.log(productIds, productPrices);
+cepBtn.addEventListener('click', searchCep);
