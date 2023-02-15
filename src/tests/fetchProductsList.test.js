@@ -1,6 +1,7 @@
 import './mocks/fetchSimulator';
 import { fetchProductsList } from '../helpers/fetchFunctions';
 import computadorSearch from './mocks/search';
+import removeLoadingLine from '../Js/removeLine';
 
 // implemente seus testes aqui
 describe('Teste a função fetchProductsList', () => {

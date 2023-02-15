@@ -1,5 +1,5 @@
 import { fetchProductsList } from '../helpers/fetchFunctions';
-import { createProductElement } from '../helpers/shopFunctions';
+import { createProductElement, createCustomElement } from '../helpers/shopFunctions';
 import removeLoadingLine from './removeLine';
 
 const productsContainer = document.querySelector('.products');
@@ -20,5 +20,12 @@ export const handleProducts = () => {
       productsContainer.appendChild(div);
     });
     removeLoadingLine();
-  });
+  })
+    .catch((error) => {
+      console.log('Entrou');
+      removeLoadingLine();
+      const errorText = 'Algum erro ocorreu, recarregue a página e tente novamente';
+      error.message = errorText;
+      productsContainer.appendChild(createCustomElement('p', 'error', error.message));
+    });
 };
