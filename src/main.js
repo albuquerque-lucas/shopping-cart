@@ -25,10 +25,7 @@ const getStoredCart = () => {
   });
 };
 
-// getStoredSum(display);
-
 getStoredCart();
 refreshSum();
 handleProducts();
-// deleteBtnHandler();
 cepBtn.addEventListener('click', searchCep);
