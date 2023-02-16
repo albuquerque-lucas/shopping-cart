@@ -1,6 +1,6 @@
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProduct } from './helpers/fetchFunctions';
-import { handleProducts } from './Js/handleProducts';
+import { handleProducts, refreshSum } from './Js/handleProducts';
 import { getSavedCartIDs } from './helpers/cartFunctions';
 import { createCartProductElement } from './helpers/shopFunctions';
 import './style.css';
@@ -25,6 +25,10 @@ const getStoredCart = () => {
   });
 };
 
+// getStoredSum(display);
+
 getStoredCart();
+refreshSum();
 handleProducts();
+// deleteBtnHandler();
 cepBtn.addEventListener('click', searchCep);

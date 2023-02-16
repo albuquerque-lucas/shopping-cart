@@ -46,6 +46,14 @@ export const getIdFromProduct = (product) => (
  * @param {string} id - ID do produto a ser removido do carrinho.
  */
 const removeCartProduct = (li, id) => {
+  const display = document.querySelector('.total-price');
+  const storedSum = Number(localStorage.getItem('shoppingCartSum'));
+  const price = Number(li.querySelector('.product__price .product__price__value')
+    .innerHTML);
+  const result = storedSum - price;
+  localStorage.setItem('shoppingCartSum', result);
+  const newStoredSum = Number(localStorage.getItem('shoppingCartSum'));
+  display.innerText = newStoredSum;
   li.remove();
   removeCartID(id);
 };

@@ -6,6 +6,35 @@ import { saveCartID } from '../helpers/cartFunctions';
 import removeLoadingLine from './removeLine';
 
 const productsContainer = document.querySelector('.products');
+export const display = document.querySelector('.total-price');
+
+export const getStoredSum = (container) => {
+  const storedCount = Number(localStorage.getItem('shoppingCartSum'));
+  container.innerHTML = storedCount;
+};
+export const refreshSum = () => {
+  getStoredSum(display);
+  const prices = document.querySelectorAll('.cart__product .product__price__value');
+  const pricesList = [];
+  prices.forEach((item) => {
+    pricesList.push(item.innerText);
+  });
+  const mapped = pricesList.map((item) => Number(item));
+  const result = mapped.reduce((acc, number) => acc + number, 0).toFixed(2);
+  localStorage.setItem('shoppingCartSum', result);
+  display.innerText = result;
+};
+
+// export const deleteBtnHandler = () => {
+//   const deleteBtn = document.querySelectorAll('.cart__products .cart__product');
+//   // deleteBtn.forEach((button) => {
+//   //   button.addEventListener('click', () => {
+//   //     console.log('clicado');
+//   //     refreshSum();
+//   //   });
+//   // });
+//   console.log(deleteBtn);
+// };
 
 export const addPreLoader = () => {
   const preLoader = document.createElement('div');
@@ -32,6 +61,7 @@ const selectProduct = (list) => {
           };
           const itemCart = createCartProductElement(itemObj);
           cartContainer.appendChild(itemCart);
+          refreshSum();
         });
     });
   });
@@ -39,7 +69,6 @@ const selectProduct = (list) => {
 
 export const handleProducts = () => {
   addPreLoader();
-
   fetchProductsList('computador').then((data) => {
     data.forEach((element) => {
       const div = createProductElement(element);
@@ -48,6 +77,7 @@ export const handleProducts = () => {
     removeLoadingLine();
     const products = document.querySelectorAll('.product');
     selectProduct(products);
+    refreshSum();
   })
     .catch((error) => {
       console.log('Entrou');
