@@ -1,3 +1,4 @@
+import PriceHandler from '../Js/PriceHandler';
 import { removeCartID, saveCartID } from './cartFunctions';
 import { fetchProduct } from './fetchFunctions';
 
@@ -47,14 +48,6 @@ export const getIdFromProduct = (product) => (
  * @param {string} id - ID do produto a ser removido do carrinho.
  */
 const removeCartProduct = (li, id) => {
-  // const display = document.querySelector('.total-price');
-  // const storedSum = Number(localStorage.getItem('shoppingCartSum'));
-  // const price = Number(li.querySelector('.product__price .product__price__value')
-  //   .innerHTML);
-  // const result = storedSum - price;
-  // localStorage.setItem('shoppingCartSum', result);
-  // const newStoredSum = Number(localStorage.getItem('shoppingCartSum'));
-  // display.innerText = newStoredSum;
   li.remove();
   removeCartID(id);
 };
@@ -100,17 +93,10 @@ export const createCartProductElement = ({ id, title, price, pictures }) => {
   idContainer.style.display = 'none';
   li.appendChild(idContainer);
 
-  removeButton.addEventListener('click', () => {
-    const totalPrice = document.querySelector('.total-price');
-    const productPrice = li.querySelector('.product__price__value').innerText;
-    const numberPriceValue = parseFloat(productPrice.replace(',', '.'));
-    let numberTotalPrice = parseFloat(totalPrice.innerText.replace(',', '.'));
-    numberTotalPrice -= numberPriceValue;
-    const fixedTotal = numberTotalPrice.toFixed(2);
-    totalPrice.innerText = fixedTotal;
-    localStorage.setItem('totalPrice', fixedTotal);
-    removeCartID(id);
-    li.remove();
+  li.addEventListener('click', () => {
+    const priceHandler = new PriceHandler();
+    priceHandler.calculateTotal('sub', li);
+    removeCartProduct(li, id);
   });
 
   return li;
@@ -157,18 +143,8 @@ export const createProductElement = ({ id, title, thumbnail, price }) => {
     cartContainer.appendChild(newCartProduct);
 
     // Operações relacionadas ao preço
-    const totalPrice = document.querySelector('.total-price');
-    const productPriceValue = priceElement
-      .querySelector('.product__price__value')
-      .innerText;
-
-    const numberPriceValue = parseFloat(productPriceValue.replace(',', '.'));
-    let numberTotalPrice = parseFloat(totalPrice.innerText.replace(',', '.'));
-
-    numberTotalPrice += numberPriceValue;
-    const fixedTotal = numberTotalPrice.toFixed(2);
-    totalPrice.innerText = fixedTotal;
-    localStorage.setItem('totalPrice', fixedTotal);
+    const priceHandler = new PriceHandler();
+    priceHandler.calculateTotal('sum', priceElement);
   });
 
   return section;
