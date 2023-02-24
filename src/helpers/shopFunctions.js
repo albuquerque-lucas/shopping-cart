@@ -1,4 +1,5 @@
-import { removeCartID } from './cartFunctions';
+import { removeCartID, saveCartID } from './cartFunctions';
+import { fetchProduct } from './fetchFunctions';
 
 // Esses comentários que estão antes de cada uma das funções são chamados de JSdoc,
 // experimente passar o mouse sobre o nome das funções e verá que elas possuem descrições!
@@ -46,14 +47,14 @@ export const getIdFromProduct = (product) => (
  * @param {string} id - ID do produto a ser removido do carrinho.
  */
 const removeCartProduct = (li, id) => {
-  const display = document.querySelector('.total-price');
-  const storedSum = Number(localStorage.getItem('shoppingCartSum'));
-  const price = Number(li.querySelector('.product__price .product__price__value')
-    .innerHTML);
-  const result = storedSum - price;
-  localStorage.setItem('shoppingCartSum', result);
-  const newStoredSum = Number(localStorage.getItem('shoppingCartSum'));
-  display.innerText = newStoredSum;
+  // const display = document.querySelector('.total-price');
+  // const storedSum = Number(localStorage.getItem('shoppingCartSum'));
+  // const price = Number(li.querySelector('.product__price .product__price__value')
+  //   .innerHTML);
+  // const result = storedSum - price;
+  // localStorage.setItem('shoppingCartSum', result);
+  // const newStoredSum = Number(localStorage.getItem('shoppingCartSum'));
+  // display.innerText = newStoredSum;
   li.remove();
   removeCartID(id);
 };
@@ -95,7 +96,23 @@ export const createCartProductElement = ({ id, title, price, pictures }) => {
   );
   li.appendChild(removeButton);
 
-  li.addEventListener('click', () => removeCartProduct(li, id));
+  const idContainer = createCustomElement('span', 'item_cart_id', id);
+  idContainer.style.display = 'none';
+  li.appendChild(idContainer);
+
+  removeButton.addEventListener('click', () => {
+    const totalPrice = document.querySelector('.total-price');
+    const productPrice = li.querySelector('.product__price__value').innerText;
+    const numberPriceValue = parseFloat(productPrice.replace(',', '.'));
+    let numberTotalPrice = parseFloat(totalPrice.innerText.replace(',', '.'));
+    numberTotalPrice -= numberPriceValue;
+    const fixedTotal = numberTotalPrice.toFixed(2);
+    totalPrice.innerText = fixedTotal;
+    localStorage.setItem('totalPrice', fixedTotal);
+    removeCartID(id);
+    li.remove();
+  });
+
   return li;
 };
 
@@ -130,6 +147,29 @@ export const createProductElement = ({ id, title, thumbnail, price }) => {
     'Adicionar ao carrinho!',
   );
   section.appendChild(cartButton);
+
+  cartButton.addEventListener('click', async () => {
+    // Operações relacionadas a adicionar o item ao carrinho
+    saveCartID(id);
+    const cartContainer = document.querySelector('.cart__products');
+    const selectedProduct = await fetchProduct(id);
+    const newCartProduct = createCartProductElement(selectedProduct);
+    cartContainer.appendChild(newCartProduct);
+
+    // Operações relacionadas ao preço
+    const totalPrice = document.querySelector('.total-price');
+    const productPriceValue = priceElement
+      .querySelector('.product__price__value')
+      .innerText;
+
+    const numberPriceValue = parseFloat(productPriceValue.replace(',', '.'));
+    let numberTotalPrice = parseFloat(totalPrice.innerText.replace(',', '.'));
+
+    numberTotalPrice += numberPriceValue;
+    const fixedTotal = numberTotalPrice.toFixed(2);
+    totalPrice.innerText = fixedTotal;
+    localStorage.setItem('totalPrice', fixedTotal);
+  });
 
   return section;
 };

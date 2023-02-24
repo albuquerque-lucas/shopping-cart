@@ -1,6 +1,3 @@
-import { createCustomElement } from './shopFunctions';
-import removeLoadingLine from '../Js/removeLine';
-
 export const fetchProduct = async (query) => {
   if (!query) throw new Error('ID não informado');
   const searchLink = `https://api.mercadolibre.com/items/${query}`;
