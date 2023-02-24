@@ -1,7 +1,7 @@
 import Product from '../Model/Product';
 import { fetchProduct, fetchProductsList } from '../../helpers/fetchFunctions';
-import { createCartProductElement, createProductElement } from '../../helpers/shopFunctions';
-import { removeCartID, saveCartID } from '../../helpers/cartFunctions';
+import { createCartProductElement, createProductElement }
+  from '../../helpers/shopFunctions';
 
 const productsContainer = document.querySelector('.products');
 
@@ -45,22 +45,6 @@ export default class ProductController {
       totalPriceContainer.innerText = savedTotalPrice;
     }
   }
-
-  // async cartHandler() {
-  //   const cartContainer = document.querySelector('.cart__products');
-  //   const productsList = document.querySelectorAll('.product');
-  //   productsList.forEach((product) => {
-  //     const button = product.querySelector('.product__add');
-  //     const productId = product.querySelector('.product__id').innerText;
-
-  //     button.addEventListener('click', async () => {
-  //       saveCartID(productId);
-  //       const selected = await fetchProduct(productId);
-  //       const selectedElement = createCartProductElement(selected);
-  //       cartContainer.appendChild(selectedElement);
-  //     });
-  //   });
-  // }
 
   static setPreLoader() {
     const preLoader = document.createElement('p');
