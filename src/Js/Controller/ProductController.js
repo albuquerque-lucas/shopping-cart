@@ -1,7 +1,7 @@
-import Product from './Product';
-import { fetchProduct, fetchProductsList } from '../helpers/fetchFunctions';
-import { createCartProductElement, createProductElement } from '../helpers/shopFunctions';
-import { removeCartID, saveCartID } from '../helpers/cartFunctions';
+import Product from '../Model/Product';
+import { fetchProduct, fetchProductsList } from '../../helpers/fetchFunctions';
+import { createCartProductElement, createProductElement } from '../../helpers/shopFunctions';
+import { removeCartID, saveCartID } from '../../helpers/cartFunctions';
 
 const productsContainer = document.querySelector('.products');
 

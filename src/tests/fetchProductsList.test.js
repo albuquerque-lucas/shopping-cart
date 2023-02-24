@@ -1,7 +1,6 @@
 import './mocks/fetchSimulator';
 import { fetchProductsList } from '../helpers/fetchFunctions';
 import computadorSearch from './mocks/search';
-import removeLoadingLine from '../Js/removeLine';
 
 // implemente seus testes aqui
 describe('Teste a função fetchProductsList', () => {
@@ -26,5 +25,5 @@ describe('Teste a função fetchProductsList', () => {
 
   it('testa se caso a função seja chamada sem argumento, retorna um erro com a mensagem Termo de busca não informado', async () => {
     await expect(fetchProductsList()).rejects.toThrow('Termo de busca não informado');
-  });
+  }); 
 });

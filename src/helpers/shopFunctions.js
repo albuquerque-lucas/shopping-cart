@@ -1,4 +1,4 @@
-import PriceHandler from '../Js/PriceHandler';
+import PriceHandler from '../Js/Service/PriceHandler';
 import { removeCartID, saveCartID } from './cartFunctions';
 import { fetchProduct } from './fetchFunctions';
 
