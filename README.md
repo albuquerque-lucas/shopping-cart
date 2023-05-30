@@ -2,7 +2,10 @@
 
 🛒 **Project Overview - What's it about?**
 
-Welcome to the Shopping Cart project! This web application was developed as part of a programming course at Trybe. Many individuals worked on this project, and this is my personal contribution, adding my own touch and implementing concepts of object-oriented programming. It's important to note that there is nothing inherently special about the project itself, as its value lies in the unique contributions made by each individual. My differentiating factor was the use of object-oriented concepts, grouping the required functionalities into service and controller classes.
+Welcome to the Shopping Cart project! This is a web application where users can make requests to the Mercado Livre shopping API. Users can interact with the page by searching for products and adding them to their shopping cart. The cart dynamically updates with the total value, and all the data is saved in the local storage with each interaction.
+
+
+This application was developed as part of a programming course at Trybe. Many individuals worked on this project, and this is my personal contribution, adding my own touch and implementing concepts of object-oriented programming. My differentiating factor was the use of object-oriented concepts, grouping the required functionalities into service and controller classes.
 
 ## Technologies Used
 
@@ -29,6 +32,6 @@ Welcome to the Shopping Cart project! This web application was developed as part
 - **Remove from Cart:** Users can remove products from the cart, which also updates the total value.
 - **Persistent Cart:** The cart data is stored in the local storage, allowing users to resume their shopping from where they left off.
 
-That's it! The Shopping Cart project represents my personal touch and approach to the requirements, incorporating concepts of object-oriented programming. If you have any questions or need further assistance, please feel free to reach out.
+That's it! If you have any questions or need further assistance, please feel free to reach out.
 
 Happy shopping! 🛍️✨
